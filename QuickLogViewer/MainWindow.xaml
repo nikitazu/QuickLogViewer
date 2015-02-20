@@ -11,8 +11,8 @@
             <GroupBox Header="{Binding OccuredTimeFormatted}" BorderBrush="{Binding TypeBrush}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Label Foreground="{Binding TypeBrush}">Type</Label>
-                        <Label Content="{Binding TypeName}" />
+                        <Label>Type</Label>
+                        <Label Foreground="{Binding TypeBrush}" Content="{Binding TypeName}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label>Source</Label>
