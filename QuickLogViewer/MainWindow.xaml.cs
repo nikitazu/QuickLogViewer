@@ -21,15 +21,22 @@ namespace QuickLogViewer
     public partial class MainWindow : Window
     {
         public Components.AppComponent AppComponent { get; set; }
+        public ViewModels.AppViewModel ViewModel { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             AppComponent = new Components.AppComponent();
-            DataContext = new ViewModels.AppViewModel
+            ViewModel = new ViewModels.AppViewModel
             {
                 LogDays = AppComponent.LogComponent.GetLogs()
             };
+            ViewModel.SelectedLogDay = ViewModel.LogDays.FirstOrDefault();
+            if (ViewModel.SelectedLogDay != null)
+            {
+                ViewModel.SelectedLog = ViewModel.SelectedLogDay.Logs.FirstOrDefault();
+            }
+            DataContext = ViewModel;
         }
     }
 }
