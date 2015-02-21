@@ -26,7 +26,7 @@ namespace QuickLogViewer.Components
                         Text = entry.Message,
                         Source = entry.Source,
                         Type = entry.EntryType
-                    }).ToList()
+                    }).OrderByDescending(log => log.Occured).ToList()
                 }).OrderByDescending(day => day.Date).Take(5).ToList();
         }
 
