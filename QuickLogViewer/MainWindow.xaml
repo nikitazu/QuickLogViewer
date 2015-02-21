@@ -4,7 +4,6 @@
         xmlns:ui="clr-namespace:QuickLogViewer.UI"
         Title="Quick Log Viewer" 
         WindowStartupLocation="CenterScreen"
-        
         MinHeight="700" 
         MinWidth="1000">
 
@@ -29,43 +28,45 @@
         </DataTemplate>
     </Window.Resources>
     
-    <StackPanel Orientation="Vertical">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MinHeight="300" />
+        </Grid.RowDefinitions>
 
-            <ListView ItemsSource="{Binding LogDays}" 
-                      ItemTemplate="{StaticResource LogDayTemplate}" 
-                      SelectedItem="{Binding SelectedLogDay}" 
-                      IsSynchronizedWithCurrentItem="True" />
+        <ListView ItemsSource="{Binding LogDays}" 
+                  ItemTemplate="{StaticResource LogDayTemplate}" 
+                  SelectedItem="{Binding SelectedLogDay}" 
+                  IsSynchronizedWithCurrentItem="True" />
             
-            <RichTextBox Grid.Column="1"
-                         Grid.RowSpan="2"
-                         IsReadOnly="True"
-                         HorizontalAlignment="Stretch"
-                         ui:RichTextBoxHelper.DocumentRtf="{Binding SelectedLog.Text}"
-                         Height="300" />
+        <RichTextBox Grid.Column="1"
+                     Grid.RowSpan="2"
+                     IsReadOnly="True"
+                     HorizontalAlignment="Stretch"
+                     ui:RichTextBoxHelper.DocumentRtf="{Binding SelectedLog.Text}"
+                     MinHeight="300" />
             
-            <Button Grid.Row="1" Click="SimulateCrashClick">Simulate crash</Button>
-        </Grid>
-        <ListBox ItemsSource="{Binding SelectedLogDay.Logs}" 
-                      ItemTemplate="{StaticResource LogTemplate}" 
-                      SelectedItem="{Binding SelectedLog}" 
-                      IsSynchronizedWithCurrentItem="True"  MaxHeight="500">
+        <Button Grid.Row="1" Click="SimulateCrashClick">Simulate crash</Button>
+
+        <ListBox Grid.Row="2"
+                 Grid.ColumnSpan="2"
+                 ItemsSource="{Binding SelectedLogDay.Logs}" 
+                 ItemTemplate="{StaticResource LogTemplate}" 
+                 SelectedItem="{Binding SelectedLog}" 
+                 IsSynchronizedWithCurrentItem="True"  MaxHeight="500">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                                ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                                MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                               ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}"   />
+                               ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-    </StackPanel>
+    </Grid>
 </Window>
