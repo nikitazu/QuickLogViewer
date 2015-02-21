@@ -44,5 +44,14 @@ namespace QuickLogViewer
                 DataContext = ViewModel;
             }
         }
+
+        private void SimulateCrashClick(object sender, RoutedEventArgs e)
+        {
+            using (var simulator = new Components.ErrorLogSimulator())
+            {
+                simulator.SimulateErrorLog();
+            }
+            Close();
+        }
     }
 }

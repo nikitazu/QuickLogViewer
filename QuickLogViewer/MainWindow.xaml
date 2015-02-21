@@ -35,6 +35,10 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
             <ListView ItemsSource="{Binding LogDays}" 
                       ItemTemplate="{StaticResource LogDayTemplate}" 
@@ -42,11 +46,13 @@
                       IsSynchronizedWithCurrentItem="True" />
             
             <RichTextBox Grid.Column="1"
+                         Grid.RowSpan="2"
                          IsReadOnly="True"
                          HorizontalAlignment="Stretch"
                          ui:RichTextBoxHelper.DocumentRtf="{Binding SelectedLog.Text}"
-                         
                          Height="300" />
+            
+            <Button Grid.Row="1" Click="SimulateCrashClick">Simulate crash</Button>
         </Grid>
         <ListBox ItemsSource="{Binding SelectedLogDay.Logs}" 
                       ItemTemplate="{StaticResource LogTemplate}" 

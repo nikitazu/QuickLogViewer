@@ -21,6 +21,7 @@ namespace QuickLogViewer.Components
             } catch (Exception e)
             {
                 _eventLog.Value.WriteEntry(e.ToString(), EventLogEntryType.Error);
+                throw;
             }
         }
 

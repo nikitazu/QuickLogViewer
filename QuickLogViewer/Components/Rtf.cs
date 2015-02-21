@@ -8,10 +8,10 @@ namespace QuickLogViewer.Components
 {
     public class Rtf
     {
-        public const string Black = @"\cf1";
-        public const string Red = @"\cf2";
-        public const string Gray = @"\cf3";
-        public const string NewLine = @"\line";
+        public const string Black = @"\cf1 ";
+        public const string Red = @"\cf2 ";
+        public const string Gray = @"\cf3 ";
+        public const string NewLine = @"\line ";
 
         public string RichText(string text)
         {
@@ -23,7 +23,7 @@ namespace QuickLogViewer.Components
 
         public string Escape(string text)
         {
-            return text.Replace(@"\", @"\\");
+            return text.Replace(@"\", @"\\").Replace("\n", Rtf.NewLine);
         }
 
         public string Bold(string text)
