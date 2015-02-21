@@ -20,5 +20,10 @@ namespace QuickLogViewer.Components
 " + text + @"
 }";
         }
+
+        public string Bold(string text)
+        {
+            return @"\b " + text + @"\b0 ";
+        }
     }
 }
