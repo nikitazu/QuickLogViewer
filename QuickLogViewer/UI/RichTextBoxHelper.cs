@@ -30,7 +30,7 @@ namespace QuickLogViewer.UI
                     {
                         var richTextBox = (RichTextBox)sender;
 
-                        var rtf = string.Format("{0}", GetDocumentRtf(richTextBox));
+                        var rtf = RichText(TryFormatCsharpStacktrace(GetDocumentRtf(richTextBox)));
                         var doc = new FlowDocument();
                         var range = new TextRange(doc.ContentStart, doc.ContentEnd);
 
@@ -38,5 +38,50 @@ namespace QuickLogViewer.UI
                         richTextBox.Document = doc;
                     }
             });
+
+        private static string TryFormatCsharpStacktrace(string text)
+        {
+            if (!HasCsharpStacktrace(text))
+            {
+                return text;
+            }
+
+            return InjectCsharpStacktraceNewlines(text);
+        }
+
+        private static string InjectCsharpStacktraceNewlines(string text)
+        {
+            return text
+                .Replace("Exception:", @"Exception:\line\cf2 ")
+                .Replace(" at ", @"\line\cf3 -> ");
+        }
+
+        private static bool HasCsharpStacktrace(string text)
+        {
+            return text.Contains("Exception") && text.Contains(" at ") && text.Contains(".cs:line");
+        }
+
+        private static string RichText(string text)
+        {
+            return @"{\rtf1\ansi\deff0
+{\colortbl;\red0\green0\blue0;\red255\green0\blue0;\red100\green100\blue100;}
+" + text + @"
+}";
+        }
+
+        private static string Red(string text)
+        {
+            return @"\cf2
+" + text + @"
+\cf1
+";
+        }
+        private static string Gray(string text)
+        {
+            return @"\cf3
+" + text + @"
+\cf1
+";
+        }
     }
 }
