@@ -57,8 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\CsharpStacktraceFormatter.cs" />
     <Compile Include="Components\ErrorLogSimulator.cs" />
     <Compile Include="Components\LogsRetriever.cs" />
+    <Compile Include="Components\Rtf.cs" />
     <Compile Include="Models\LogModel.cs" />
     <Compile Include="UI\RichTextBoxHelper.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
