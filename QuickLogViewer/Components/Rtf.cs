@@ -21,6 +21,11 @@ namespace QuickLogViewer.Components
 }";
         }
 
+        public string Escape(string text)
+        {
+            return text.Replace(@"\", @"\\");
+        }
+
         public string Bold(string text)
         {
             return @"\b " + text + @"\b0 ";

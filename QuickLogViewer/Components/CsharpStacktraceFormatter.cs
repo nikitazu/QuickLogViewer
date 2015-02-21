@@ -14,12 +14,14 @@ namespace QuickLogViewer.Components
 
         public string TryFormatCsharpStacktrace(string text)
         {
-            if (!HasCsharpStacktrace(text))
+            string escapedText = _rtf.Escape(text);
+
+            if (!HasCsharpStacktrace(escapedText))
             {
-                return text;
+                return escapedText;
             }
 
-            return _rtf.RichText(InjectCsharpStacktraceNewlines(text));
+            return _rtf.RichText(InjectCsharpStacktraceNewlines(escapedText));
         }
 
         private string InjectCsharpStacktraceNewlines(string text)
