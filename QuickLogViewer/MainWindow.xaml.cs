@@ -20,23 +20,29 @@ namespace QuickLogViewer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Components.AppComponent AppComponent { get; set; }
         public ViewModels.AppViewModel ViewModel { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            AppComponent = new Components.AppComponent();
-            ViewModel = new ViewModels.AppViewModel
+            InitializeViewModel();
+        }
+
+        private void InitializeViewModel()
+        {
+            using (var retriever = new Components.LogsRetriever())
             {
-                LogDays = AppComponent.LogComponent.GetLogs()
-            };
-            ViewModel.SelectedLogDay = ViewModel.LogDays.FirstOrDefault();
-            if (ViewModel.SelectedLogDay != null)
-            {
-                ViewModel.SelectedLog = ViewModel.SelectedLogDay.Logs.FirstOrDefault();
+                ViewModel = new ViewModels.AppViewModel
+                {
+                    LogDays = retriever.GetLogs()
+                };
+                ViewModel.SelectedLogDay = ViewModel.LogDays.FirstOrDefault();
+                if (ViewModel.SelectedLogDay != null)
+                {
+                    ViewModel.SelectedLog = ViewModel.SelectedLogDay.Logs.FirstOrDefault();
+                }
+                DataContext = ViewModel;
             }
-            DataContext = ViewModel;
         }
     }
 }

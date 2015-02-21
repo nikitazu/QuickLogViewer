@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace QuickLogViewer.Components
 {
-    public class LogComponent
+    public class LogsRetriever : IDisposable
     {
         private Lazy<EventLog> _eventLog = new Lazy<EventLog>(() => new EventLog("Application"));
 
@@ -28,6 +28,15 @@ namespace QuickLogViewer.Components
                         Type = entry.EntryType
                     }).ToList()
                 }).OrderByDescending(day => day.Date).Take(5).ToList();
+        }
+
+        public void Dispose()
+        {
+            if (_eventLog.IsValueCreated)
+            {
+                _eventLog.Value.Dispose();
+                _eventLog = null;
+            }
         }
     }
 }

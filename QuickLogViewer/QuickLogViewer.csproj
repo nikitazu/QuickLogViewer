@@ -57,8 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Components\AppComponent.cs" />
-    <Compile Include="Components\LogComponent.cs" />
+    <Compile Include="Components\ErrorLogSimulator.cs" />
+    <Compile Include="Components\LogsRetriever.cs" />
     <Compile Include="Models\LogModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\LogDayViewModel.cs" />

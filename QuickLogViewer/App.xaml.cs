@@ -13,5 +13,16 @@ namespace QuickLogViewer
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            if(e.Args.Contains("--simulate-error"))
+            {
+                using (var simulator = new Components.ErrorLogSimulator())
+                {
+                    simulator.SimulateErrorLog();
+                }
+            }
+        }
     }
 }
