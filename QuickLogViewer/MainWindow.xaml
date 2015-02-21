@@ -4,9 +4,9 @@
         xmlns:ui="clr-namespace:QuickLogViewer.UI"
         Title="Quick Log Viewer" 
         WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight"
+        
         MinHeight="700" 
-        MinWidth="800">
+        MinWidth="1000">
 
     <Window.Resources>
         <DataTemplate x:Key="LogTemplate">
@@ -30,18 +30,24 @@
     </Window.Resources>
     
     <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
             <ListView ItemsSource="{Binding LogDays}" 
                       ItemTemplate="{StaticResource LogDayTemplate}" 
                       SelectedItem="{Binding SelectedLogDay}" 
                       IsSynchronizedWithCurrentItem="True" />
-            <RichTextBox IsReadOnly="True"
+            
+            <RichTextBox Grid.Column="1"
+                         IsReadOnly="True"
+                         HorizontalAlignment="Stretch"
                          ui:RichTextBoxHelper.DocumentRtf="{Binding SelectedLog.Text}"
-                         MaxWidth="700" 
-                         MaxHeight="300" 
-                         Width="700" 
+                         
                          Height="300" />
-        </StackPanel>
+        </Grid>
         <ListBox ItemsSource="{Binding SelectedLogDay.Logs}" 
                       ItemTemplate="{StaticResource LogTemplate}" 
                       SelectedItem="{Binding SelectedLog}" 
