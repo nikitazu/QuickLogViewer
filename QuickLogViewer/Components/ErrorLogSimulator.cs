@@ -16,7 +16,8 @@ namespace QuickLogViewer.Components
             try
             {
                 var x = new { Foo = (string)null };
-                Console.WriteLine(x.Foo.ToUpper());
+                Action doError = () => Console.WriteLine(x.Foo.ToUpper());
+                doError();
             } catch (Exception e)
             {
                 _eventLog.Value.WriteEntry(e.ToString(), EventLogEntryType.Error);
