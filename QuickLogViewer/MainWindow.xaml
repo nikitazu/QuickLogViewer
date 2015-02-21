@@ -1,6 +1,7 @@
 ﻿<Window x:Class="QuickLogViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:QuickLogViewer.UI"
         Title="Quick Log Viewer" 
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
@@ -34,13 +35,12 @@
                       ItemTemplate="{StaticResource LogDayTemplate}" 
                       SelectedItem="{Binding SelectedLogDay}" 
                       IsSynchronizedWithCurrentItem="True" />
-            <TextBox IsReadOnly="True" 
-                     Text="{Binding SelectedLog.Text}" 
-                     TextWrapping="Wrap" 
-                     MaxWidth="700" 
-                     MaxHeight="300" 
-                     Width="700" 
-                     Height="300"/>
+            <RichTextBox IsReadOnly="True"
+                         ui:RichTextBoxHelper.DocumentRtf="{Binding SelectedLog.Text}"
+                         MaxWidth="700" 
+                         MaxHeight="300" 
+                         Width="700" 
+                         Height="300" />
         </StackPanel>
         <ListBox ItemsSource="{Binding SelectedLogDay.Logs}" 
                       ItemTemplate="{StaticResource LogTemplate}" 

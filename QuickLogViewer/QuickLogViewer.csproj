@@ -60,6 +60,7 @@
     <Compile Include="Components\ErrorLogSimulator.cs" />
     <Compile Include="Components\LogsRetriever.cs" />
     <Compile Include="Models\LogModel.cs" />
+    <Compile Include="UI\RichTextBoxHelper.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\LogDayViewModel.cs" />
     <Page Include="MainWindow.xaml">
