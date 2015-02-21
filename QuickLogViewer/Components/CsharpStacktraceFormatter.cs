@@ -15,7 +15,7 @@ namespace QuickLogViewer.Components
         private static readonly Regex _exceptionMessage = new Regex(@"Exception:", RegexOptions.Compiled);
 
         const string PathCharacters = @"[\w|\.|\\|:|\s|_]+";
-        const string MethodCharacters = @"[\w|\.|_|<|>]+\(\)";
+        const string MethodCharacters = @"[\w|\.|_|<|>]+\([\w|\.|_|<|>|,|\s]*\)";
 
         public string TryFormatCsharpStacktrace(string text)
         {
@@ -32,9 +32,9 @@ namespace QuickLogViewer.Components
         private string InjectCsharpStacktraceNewlines(string text)
         {
             text = _exceptionMessage.Replace(text, match => match.Groups[0].Value + Rtf.NewLine + Rtf.Red);
-            text = _exceptionName.Replace(text, match => _rtf.Bold(match.Groups[0].Value));
+            text = _exceptionName.Replace(text, match => Rtf.NewLine + Rtf.NewLine + _rtf.Bold(match.Groups[0].Value));
             text = _stackTraceLine.Replace(text, match =>
-                Rtf.NewLine + Rtf.Gray + match.Groups[1].Value +
+                Rtf.NewLine + Rtf.NewLine + Rtf.Gray + match.Groups[1].Value +
                 Rtf.NewLine + Rtf.Gray + match.Groups[2].Value);
             return text;
         }

@@ -17,11 +17,18 @@ namespace QuickLogViewer.Components
             {
                 var x = new { Foo = (string)null };
                 Action doError = () => Console.WriteLine(x.Foo.ToUpper());
-                doError();
+                MyMethodThatShouldFail("XXX", doError);
             } catch (Exception e)
             {
                 _eventLog.Value.WriteEntry(e.ToString(), EventLogEntryType.Error);
             }
+        }
+
+        private string MyMethodThatShouldFail(string arg1, Action doError)
+        {
+            doError();
+            Console.WriteLine(arg1);
+            return arg1;
         }
 
         public void Dispose()
